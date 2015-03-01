@@ -1,0 +1,137 @@
+<html>
+  <head>
+    <title>JS Demo</title>
+    <style>
+    	html, body, div, span, applet, object, iframe,
+		h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+		a, abbr, acronym, address, big, cite, code,
+		del, dfn, em, img, ins, kbd, q, s, samp,
+		small, strike, strong, sub, sup, tt, var,
+		b, u, i, center,
+		dl, dt, dd, ol, ul, li,
+		fieldset, form, label, legend,
+		table, caption, tbody, tfoot, thead, tr, th, td,
+		article, aside, canvas, details, embed, 
+		figure, figcaption, footer, header, hgroup, 
+		menu, nav, output, ruby, section, summary,
+		time, mark, audio, video {
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+		}
+		/* HTML5 display-role reset for older browsers */
+		article, aside, details, figcaption, figure, 
+		footer, header, hgroup, menu, nav, section {
+			display: block;
+		}
+		body {
+			line-height: 1;
+		}
+		ol, ul {
+			list-style: none;
+		}
+		blockquote, q {
+			quotes: none;
+		}
+		blockquote:before, blockquote:after,
+		q:before, q:after {
+			content: '';
+			content: none;
+		}
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+		/* END RESET */
+    </style>
+  </head>
+  <body>
+    <div id="content"></div>
+    <script>
+
+    	var tableSize = 200;
+    	var refreshRate = 16;
+
+		var number_of_lines = 10;
+		var line_distance = 12;
+
+    	function tableCreate(){
+			var body=document.getElementsByTagName('body')[0];
+			var tbl=document.createElement('table');
+			tbl.style.width='100%';
+			tbl.style.height='100%';
+			// tbl.style.border='border: 1px solid black';
+			var tbdy=document.createElement('tbody');
+			for(var i=0;i<tableSize;i++){
+			    var tr=document.createElement('tr');
+			    for(var j=0;j<tableSize;j++){
+			        var td=document.createElement('td');
+			        td.id = i+''+j;
+			        td.style.border ='1px solid black';
+			        td.style.backgroundColor = '#6699FF';
+			        // td.appendChild(document.createTextNode('\u0020'))
+			        // i==1&&j==1?td.setAttribute('rowSpan','2'):null;
+			        tr.appendChild(td)
+			        
+			    }
+			    tbdy.appendChild(tr);
+			}
+			tbl.appendChild(tbdy);
+			body.appendChild(tbl)
+		}
+
+		tableCreate();
+
+
+
+
+
+
+
+
+
+
+	  var startOfLines = 0;
+
+	  function yourFunction(){
+	      //data[0][0] === "blue" ? data[0][0] = "yellow" : data[0][0] = "blue";
+	      
+	      for(i=0; i<tableSize; i++) {
+	        for(j=0; j<tableSize; j++) {
+	        	var cell = document.getElementById(i+''+j);
+	          	cell.style.backgroundColor = '#6699FF';
+	        }
+	      }
+
+	      var startJ = startOfLines;
+	      for(m=0; m<number_of_lines; m++) {
+
+	        var j = startJ;
+	        for(i=0; i<tableSize; i++) {
+	          var cell = document.getElementById(i+''+j);
+	          cell.style.backgroundColor = '#FFCC00';
+	          j++;
+	          if(j === tableSize) {
+	            j = 0;
+	          }
+	        }
+	        startJ+=line_distance;
+
+	      }
+
+	      startOfLines += 1;
+	      if(startOfLines=== tableSize - (number_of_lines -1)*line_distance) {
+	        startOfLines = 0;
+	      }
+	      setTimeout(yourFunction, refreshRate);
+	  }
+
+	  yourFunction();
+
+    </script>
+  </body>
+</html>
